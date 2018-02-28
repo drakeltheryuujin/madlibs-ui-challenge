@@ -30,33 +30,25 @@ var AppComponent = React.createClass({
 
 
     return (
-      // this is the `jsx` which you can alter to your needs. Edit it just
-      // like HTML. use `className='some-class'` instead of
-      // `class='some-class'`. Everything has to be
-      // contained in one single element in the end, so
-      //
-      // **ERROR**
-      // return (
-      //   <div></div>
-      //   <p></p>
-      // )
-      // **GOOD**
-      // return (
-      //   <div>
-      //     <div></div>
-      //     <p></p>
-      //   </div>
-      // )
-      <div className="main">
-        <h1>FLOCABULARY MADLIB</h1>
-        {content}
+      <div className="wrapper">
+        <div className="page-two">
+          {content}
+        </div>
+        <div className={ this.state.fadeOut ? 'home-screen fade-out' : 'home-screen' } onClick={this.fadeOut}>
+          <div className="intro-text">
+            <h1>FLOCABULARY MADLIB</h1>
+            <h2>Fill out the form to create your madlib</h2>
+            <h2>(click screen to start)</h2>
+          </div>
+        </div>
       </div>
     );
   },
 
   getInitialState: function() {
     return {
-      submittedValue: null
+      submittedValue: null,
+      fadeOut: false
     };
   },
   getDefaultProps: function() {
@@ -66,6 +58,11 @@ var AppComponent = React.createClass({
   },
   reset: function() {
     this.setState(this.getInitialState());
+  },
+  fadeOut: function() {
+    this.setState({
+      fadeOut: !this.state.fadeOut
+    });
   }
 });
 

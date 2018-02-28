@@ -12,28 +12,28 @@ var MadlibForm = React.createClass({
   render: function() {
     return (
       <div className='madlib-form'>
-        <h2>Fill out the form below to create your madlib</h2>
+        <h2>Flocabulary Madlib</h2>
         <form onSubmit={this.onSubmit}>
           <Form
-            ref="form"
-            onChange={this.onChange}
-            value={this.state.value}
-            type={this.state.type}
-            options={this.state.options}
-          />
-          {
-            Object.keys(this.state.value).filter(key => this.state.value[key]).length === Object.keys(this.state.inputs).length
-            ? (
-                <button
-                  className="submit-button"
-                  type="submit"
-                >
-                  Make your mad lib!
-                </button>
-              )
-            : null
-          }
-        </form>
+              ref="form"
+              onChange={this.onChange}
+              value={this.state.value}
+              type={this.state.type}
+              options={this.state.options}
+            />
+            {
+              Object.keys(this.state.value).filter(key => this.state.value[key]).length === Object.keys(this.state.inputs).length
+              ? (
+                  <button
+                    className="submit-button"
+                    type="submit"
+                  >
+                    Make your madlib!
+                  </button>
+                )
+              : null
+            }
+          </form>
       </div>
     );
   },
@@ -56,7 +56,7 @@ var MadlibForm = React.createClass({
     while (result = blankRegexp.exec(this.props.text)) {
       var fieldType;
       if (result[1] === 'wordEndingWithLy') {
-        fieldType = t.refinement(t.String, s => s.endsWith('ly'));
+        // fieldType = t.refinement(t.String, s => s.endsWith('ly'));
       } else if (result[1] === 'number') {
         fieldType = t.Number;
       } else {
@@ -77,17 +77,22 @@ var MadlibForm = React.createClass({
       },
       value: {},
       submitted: false,
-      inputs: inputs,
+      inputs: inputs
     };
   },
 
   componentDidMount: function() {
-    $('.madlib-form input').focus(e => {
-      $('.has-focus').removeClass('has-focus');
-      $(e.target).parent().addClass('has-focus');
-    })
+    $('.form-group').first().addClass('has-focus');
+      $(document).on('keyup', function(e) {
+        if(e.which == 13) {
+          if( $('.has-focus').children('input').val() ) {
+            $('.has-focus').next().addClass('has-focus').prev().removeClass('has-focus');
+            $('.has-focus').last('.has-focus').prevAll('.form-group').addClass('answer-added').removeClass('has-focus');
+            $('.has-focus').children('input').focus();
+          }
+        }
+    });
   },
-
   onSubmit: function(event) {
     event.preventDefault();
     if (this.formsAreValid()) {

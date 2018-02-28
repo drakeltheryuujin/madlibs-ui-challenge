@@ -6,18 +6,18 @@ var SubmittedMadlib = React.createClass({
     var filledInMadlib = this.getFilledInMadlib();
 
     return (
-      // this is what creates the displayed finished
-      // madlib
       <div className='submitted-madlib-container'>
-        <h2>Your madlib:</h2>
-        <button
-        	className='back-button'
-          onClick={this.props.reset}
-        >
-          Go back
-        </button>
-        <div className='submitted-madlib'>
-          {filledInMadlib}
+        <div className='madlib-wrapper'>
+          <h2>Flocabulary madlib</h2>
+          <button
+            className='back-button'
+            onClick={this.props.reset}
+          >
+            Go back
+          </button>
+          <div className='submitted-madlib'>
+            {filledInMadlib}
+          </div>
         </div>
       </div>
     );
