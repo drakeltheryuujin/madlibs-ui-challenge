@@ -1,8 +1,200 @@
 /* Base Application Styles */
 
+$whiteBackground: rgba(255, 255, 255, 1.0);
+$mainTextColor: #ffffff;
+$green: #15ab5a;
+$disabledTextColor: #70bf86;
+
+html, body {
+  font-family: Arial, sans-serif;
+}
+
+h1 {
+  animation: bounce 500ms;
+  animation-fill-mode: forwards;
+  animation-timing-function: linear;
+  color: $mainTextColor;
+  font-size: 38px;
+  margin-bottom: 40px;
+  opacity: 0;
+  text-align: center;
+}
+
+h2 {
+  animation: bounce 500ms;
+  animation-delay: 250ms;
+  animation-fill-mode: forwards;
+  animation-timing-function: linear;
+  font-size: 20px;
+  margin: 0;
+  opacity: 0;
+}
+
+.wrapper {
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: column-reverse;
+  -moz-flex-direction: column-reverse;
+  -ms-flex-direction: column-reverse;
+  -o-flex-direction: column-reverse;
+  flex-direction: column-reverse;
+
+  > div, a {
+    background: $green;
+    position: absolute;
+    color: $mainTextColor;
+    height: 100vh;
+    left: 0;
+    position: absolute;
+    text-align: center;
+    top: 0;
+    width: 100vw;
+  }
+}
+
+.home-screen {
+  > .intro-text {
+    left: 50%;
+    position: relative;
+    top: 50%;
+    transform: perspective(1px) translateY(-50%) translateX(-50%);
+    width: 50%;
+  }
+}
+
+.madlib-form {
+  position: relative;
+  top: 50%;
+  transform: perspective(1px) translateY(-50%);
+
+  h2 {
+    color: $disabledTextColor;
+    font-size: 28px;
+    margin-bottom: 44px;
+  }
+  fieldset {
+    border: none;
+    padding: 0;
+  }
+}
+
+.fade-out {
+  visibility: hidden;
+  opacity: 0;
+  transition: visibility 0s .5s, opacity .5s linear;
+    > * {
+    margin-top: -10000px;
+    transition: margin-top 0s .5s;
+  }
+}
+
+
+.form-group {
+  font-size: 30px;
+  margin-bottom: 44px;
+  visibility: hidden;
+  position: absolute;
+
+  &.has-focus, .has-error {
+    font-size: 38px;
+    visibility: visible;
+    position: static;
+
+    label {
+      color: $mainTextColor !important;
+    }
+
+    input {
+      border-bottom: 6px solid $mainTextColor;
+      color: $mainTextColor !important;
+      outline: none;
+    }
+  }
+
+  &:first-child {
+    visibility: visible;
+    position: static;
+  }
+
+  label {
+    color: $disabledTextColor;
+    margin-right: 14px;
+  }
+
+  input {
+    background: none;
+    border: none;
+    color: $disabledTextColor;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 100px;
+    white-space: nowrap;
+  }
+
+  input[type="number"] {
+    width: 88px;
+  }
+
+  &.answer-added {
+    visibility: visible;
+    position: static;
+  }
+}
+
+/* .form-group ~ .form-group.has-focus { */
+  /* visibility: visible; */
+/* } */
+
+button, input[type="submit"] {
+  border: none;
+  border-radius: 5px;
+  font-weight: bold;
+  padding: 20px 30px;
+}
+
+.submitted-madlib {
+  clear: both;
+  -moz-column-count: 2;
+  -moz-columns: 2;
+  -webkit-columns: 2;
+  columns: 2;
+
+  animation: bounce 500ms;
+  animation-delay: 500ms;
+  animation-fill-mode: forwards;
+  animation-timing-function: linear;
+}
+
+.madlib-wrapper {
+  padding: 96px 220px 72px;
+}
+
+.submitted-madlib-container {
+  background: $whiteBackground;
+  color: #000;
+  font-weight: bold;
+  height: 100vh;
+  text-align: left;
+
+  h2 {
+    color: $green;
+    float: left;
+    font-size: 28px;
+    margin-bottom: 86px;
+  }
+
+  .back-button {
+    float: right;
+    border: $green 1px solid;
+    color: $green;
+  }
+}
+
 .madlib-line {
   display: block;
   height: 20px;
+  text-decoration: none;
 }
 
 .madlib-line.last-of-chunk + .madlib-line {
@@ -10,5 +202,27 @@
 }
 
 .user-submitted-value {
-  text-decoration: underline;
+  background: $green;
+  border-radius: 5px;
+  color: $whiteBackground;
+  padding: 4px;
+}
+
+@keyframes bounce{
+  0%{
+    opacity: 0;
+    transform: scale(0.3) translate3d(0,0,0);
+  }
+  50%{
+    opacity: 0.9;
+    transform: scale(1.1);
+  }
+  80%{
+    opacity: 1;
+    transform: scale(0.89);
+  }
+  100%{
+    opacity: 1;
+    transform: scale(1) translate3d(0,0,0);
+  }
 }
